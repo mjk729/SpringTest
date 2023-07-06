@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController		// @controller + @responseBody
 @RequestMapping("/lifecycle/test02")
 public class Test02Controller {
 
@@ -61,13 +61,29 @@ public class Test02Controller {
 	@RequestMapping("/2")
 	public List<Post> postList() {
 		
+		// 요렇게도 가능
+//		List<Post> postList = new ArrayList<>();
+//		Post post = new Post("안녕하세요, 가입인사 드립니다.","hangulu","안녕하세요, 가입했어요. 앞으로 잘 부탁 드립니다. 활동 열심히 하겠습니다.");
+//		postList.add(post);
+//		
+//		post = new Post("헐, 대박","bada","오늘 목요일이 었어.....금요일인줄");
+//		postList.add(post);
+//		
+//		post = new Post("오늘 데이트 한 이야기 해드릴게요", "dulumary","......");
+//		postList.add(post);
+//		
+//		return postList;
+		
 		List<Post> postList = new ArrayList<>();
 		Post post1 = new Post("안녕하세요, 가입인사 드립니다.","hangulu","안녕하세요, 가입했어요. 앞으로 잘 부탁 드립니다. 활동 열심히 하겠습니다.");
 		postList.add(post1);
+		
 		Post post2 = new Post("헐, 대박","bada","오늘 목요일이 었어.....금요일인줄");
-		postList.add(post2);		
+		postList.add(post2);
+		
 		Post post3 = new Post("오늘 데이트 한 이야기 해드릴게요", "dulumary","......");
 		postList.add(post3);
+		
 		return postList;
 	}
 		
@@ -75,7 +91,7 @@ public class Test02Controller {
 	
 	@RequestMapping("/3")
 	public ResponseEntity<Map<String, String>> entityresponse(){
-	
+		
 		Map<String, String> entity = new HashMap<>();
 		entity.put("title","안녕하세요, 가입인사 드립니다.");
 		entity.put("user", "hangulu");
@@ -83,5 +99,12 @@ public class Test02Controller {
 		
 		ResponseEntity<Map<String, String>> entityResult = new ResponseEntity(entity,HttpStatus.INTERNAL_SERVER_ERROR);
 		return entityResult;
+	}
+	
+	@RequestMapping("/4")
+	public ResponseEntity<Post> postError(){
+		Post post = new Post("안녕하세요, 가입인사 드립니다.","hangulu","안녕하세요, 가입했어요. 앞으로 잘 부탁 드립니다. 활동 열심히 하겠습니다.");
+		ResponseEntity<Post> entity = new ResponseEntity<>(post,HttpStatus.INTERNAL_SERVER_ERROR);
+		return entity;
 	}
 }
