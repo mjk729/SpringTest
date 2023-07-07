@@ -1,4 +1,4 @@
-package com.sinsokeyt.test.lifecycle;
+package com.sinsokeyt.spring.test.lifecycle;
 
 public class Post {
 	

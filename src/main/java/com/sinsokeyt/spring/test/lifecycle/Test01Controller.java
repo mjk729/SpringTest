@@ -1,4 +1,4 @@
-package com.sinsokeyt.test.lifecycle;
+package com.sinsokeyt.spring.test.lifecycle;
 
 import java.util.HashMap;
 import java.util.Map;

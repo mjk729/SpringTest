@@ -1,4 +1,4 @@
-package com.sinsokeyt.test.hello;
+package com.sinsokeyt.spring.test.hello;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
