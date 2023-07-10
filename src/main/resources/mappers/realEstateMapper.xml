@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.sinsokeyt.spring.test.mybatis.repository.RealEstateRepository">
+ 	<select id="selectRealEstate" resultType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate"
+ 	parameterType="int">
+ 		select id
+			,realtorId
+			,address
+			,area
+			,type
+			,price
+			,rentPrice
+			,createdAt
+			,updatedAt
+		from real_estate
+		where id=#{id};
+ 	</select>
+ 	
+ 	<select id="selectRealEstateByRentPrice" parameterType="int" 
+ 	resultType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate">
+ 		select id
+			,realtorId
+			,address
+			,area
+			,type
+			,price
+			,rentPrice
+			,createdAt
+			,updatedAt
+		from real_estate
+		where <![CDATA[ rentPrice < #{rentPrice} ]]>
+		and type = "월세"
+ 	</select>
+ 	
+ 	<select id="selectRealEstateByAreaPrice" parameterType="map" resultType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate">
+ 		select id
+			,realtorId
+			,address
+			,area
+			,type
+			,price
+			,rentPrice
+			,createdAt
+			,updatedAt
+		from real_estate
+		where <![CDATA[ area > #{area} 
+		and price < #{price} ]]>
+ 	</select>
+ </mapper>
