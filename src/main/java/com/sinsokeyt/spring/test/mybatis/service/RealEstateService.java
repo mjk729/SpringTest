@@ -31,4 +31,35 @@ public class RealEstateService {
 			List<RealEstate> realEstateList = realEstateRepository.selectRealEstateByAreaPrice(area, price);
 			return realEstateList;
 		}
+		
+	// 객체로 전달된 데이터 저장
+	public int addRealEstateByObject(RealEstate realEstate) {
+		int count = realEstateRepository.insertRealEstateByObject(realEstate);
+		return count;
+	}
+		
+		
+	// field로 전달된 데이터 저장
+	public int addRealEstate(int realtorId
+  			,String address
+  			,int area
+  			,String type
+  			,int price
+  			,int rentPrice) {
+		int count = realEstateRepository.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+		return count;
+	}
+	
+	// update할 데이터 저장
+	public int addRealEstateForUpdate() {
+		int count = realEstateRepository.updateRealEstate();
+		return count;
+	}
+	
+	// delete할 데이터 저장
+	public int addRealEstateForDelete(int id) {
+		int count = realEstateRepository.deleteRealEstate(id);
+		return count;
+	}
+	
 }

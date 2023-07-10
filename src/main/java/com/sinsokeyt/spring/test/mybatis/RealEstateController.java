@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +14,7 @@ import com.sinsokeyt.spring.test.mybatis.domain.RealEstate;
 import com.sinsokeyt.spring.test.mybatis.service.RealEstateService;
 
 @Controller
-@RequestMapping("/mybatis/test01")
+@RequestMapping("/mybatis/test")
 public class RealEstateController {
 	
 	@Autowired
@@ -42,4 +43,45 @@ public class RealEstateController {
 		List<RealEstate> realEstateList = realEstateService.getRealEstateByAreaPrice(area, price);
 		return realEstateList;
 	}
+	
+	// 객체로 insert 하기
+	@RequestMapping("/4")
+	@ResponseBody
+	public String createRealEstateByObject() {
+		RealEstate realEstate = new RealEstate();
+		realEstate.setRealtorId(3);
+		realEstate.setAddress("푸르지용 리버 303동 1104호");
+		realEstate.setArea(89);
+		realEstate.setType("매매");
+		realEstate.setPrice(100000);
+		int count = realEstateService.addRealEstateByObject(realEstate);
+		return "삽입 개수 : " + count;
+	}
+	
+	
+	// field 로 insert 하기
+	@ResponseBody
+	@RequestMapping("/5")
+	public String createRealEstate(@RequestParam("realtorId") int realtorId) {
+		int count = realEstateService.addRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+		
+		return "삽입 개수 : " + count;
+	}
+	
+	// update
+	@ResponseBody
+	@RequestMapping("/6")
+	public String createRealEstateForUpdate() {
+		int count = realEstateService.addRealEstateForUpdate();
+		return "수정 성공 : " + count;
+	}
+	
+	// delete
+	@ResponseBody
+	@RequestMapping("/7")
+	public String createRealEstateForDelete(@Param("id") int id) {
+		int count = realEstateService.addRealEstateForDelete(id);
+		return "삭제 성공 : " + count;
+	}
+	
 }

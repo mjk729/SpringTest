@@ -48,4 +48,68 @@
 		where <![CDATA[ area > #{area} 
 		and price < #{price} ]]>
  	</select>
+ 	
+ 	<insert id="insertRealEstateByObject" parameterType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate">
+  		insert into
+ 			real_estate
+ 		(
+			realtorId
+  			,address
+  			,area
+  			,type
+  			,price 
+ 		)
+ 		value
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 		)
+ 		
+ 		
+  	</insert>
+ 	
+ 	
+ 	<insert id="insertRealEstate" parameterType="map">
+ 		insert into
+ 			real_estate
+ 		(
+			realtorId
+  			,address
+  			,area
+  			,type
+  			,price 
+  			,rentPrice
+ 		)
+ 		value
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 		)
+ 		
+  	</insert>
+  	
+  	<update id="updateRealEstate">
+  		update
+  			real_estate
+  		set
+  			type = "전세", price = 70000
+  		where
+  			id = 24;
+  	</update>
+  	
+  	<delete id="deleteRealEstate" parameterType="int">
+  		delete
+  			*
+  		from
+  			real_estate
+  		where
+  			id = #{id}
+  	</delete>
  </mapper>
