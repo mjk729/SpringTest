@@ -49,7 +49,8 @@
 		and price < #{price} ]]>
  	</select>
  	
- 	<insert id="insertRealEstateByObject" parameterType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate">
+ 	<insert id="insertRealEstateByObject" 
+ 	parameterType="com.sinsokeyt.spring.test.mybatis.domain.RealEstate">
   		insert into
  			real_estate
  		(
@@ -58,6 +59,7 @@
   			,area
   			,type
   			,price 
+  			,rentPrice
  		)
  		value
  		(
@@ -66,6 +68,7 @@
  			, #{area}
  			, #{type}
  			, #{price}
+ 			, #{rentPricee}
  		)
  		
  		
@@ -95,18 +98,18 @@
  		
   	</insert>
   	
-  	<update id="updateRealEstate">
+  	<update id="updateRealEstate" parameterType="map">
   		update
   			real_estate
   		set
-  			type = "전세", price = 70000
+  			type = #{type}, price = #{price}
+  			, updatedAt = now()
   		where
-  			id = 24;
+  			id = #{id};
   	</update>
   	
   	<delete id="deleteRealEstate" parameterType="int">
   		delete
-  			*
   		from
   			real_estate
   		where

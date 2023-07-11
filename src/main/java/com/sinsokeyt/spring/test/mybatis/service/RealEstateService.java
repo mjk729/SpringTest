@@ -32,14 +32,14 @@ public class RealEstateService {
 			return realEstateList;
 		}
 		
-	// 객체로 전달된 데이터 저장
+	// RealEstate 객체로 기반으로 매물 정보 저장 기능
 	public int addRealEstateByObject(RealEstate realEstate) {
 		int count = realEstateRepository.insertRealEstateByObject(realEstate);
 		return count;
 	}
 		
 		
-	// field로 전달된 데이터 저장
+	// 매물 정보를 전달 받고, 정보 저장
 	public int addRealEstate(int realtorId
   			,String address
   			,int area
@@ -50,14 +50,14 @@ public class RealEstateService {
 		return count;
 	}
 	
-	// update할 데이터 저장
-	public int addRealEstateForUpdate() {
-		int count = realEstateRepository.updateRealEstate();
+	// 수정 대상 id와 type, price 값 전달 받고, 수정 기능
+	public int updateRealEstate(int id, String type, int price) {
+		int count = realEstateRepository.updateRealEstate(id, type, price);
 		return count;
 	}
 	
 	// delete할 데이터 저장
-	public int addRealEstateForDelete(int id) {
+	public int deleteRealEstate(int id) {
 		int count = realEstateRepository.deleteRealEstate(id);
 		return count;
 	}

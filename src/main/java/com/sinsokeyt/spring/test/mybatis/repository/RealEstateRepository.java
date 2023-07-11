@@ -19,7 +19,7 @@ public interface RealEstateRepository {
 	public List<RealEstate> selectRealEstateByAreaPrice(@Param("area") int area, @Param("price") int price);
 	
 	
-	// 객체로 데이터를 전달 받고 insert
+	// RealEstate 객체를 기반으로 insert 수행
 	public int insertRealEstateByObject(RealEstate realEstate);
 	
 	
@@ -32,7 +32,9 @@ public interface RealEstateRepository {
 			, @Param("rentPrice") int rentPrice);
 	
 	// 데이터 전달 받고 update
-	public int updateRealEstate();
+	public int updateRealEstate(@Param("id") int id
+			,@Param("type") String type
+			,@Param("price") int price);
 	
 	// 데이터 전달 받고 delete
 	public int deleteRealEstate(@Param("id") int id);

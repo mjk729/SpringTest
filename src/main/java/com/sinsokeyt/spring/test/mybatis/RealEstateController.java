@@ -14,7 +14,7 @@ import com.sinsokeyt.spring.test.mybatis.domain.RealEstate;
 import com.sinsokeyt.spring.test.mybatis.service.RealEstateService;
 
 @Controller
-@RequestMapping("/mybatis/test")
+@RequestMapping("/mybatis")
 public class RealEstateController {
 	
 	@Autowired
@@ -22,14 +22,14 @@ public class RealEstateController {
 	
 	// id를 전달 받고, 해당 매물 정보를 json으로 response에 담는다.
 	@ResponseBody
-	@RequestMapping("/1")
+	@RequestMapping("/test01/1")
 	public RealEstate realEstate(@RequestParam("id") int id) {
 		RealEstate realEstate = realEstateService.getRealEstate(id);
 		return realEstate;
 	}
 	
 	// 월세를 전달 받고, 해당 월세보다 낮은 월세 매물 json으로 response에 담는다.
-	@RequestMapping("/2")
+	@RequestMapping("/test01/2")
 	@ResponseBody
 	public List<RealEstate> realEstateByRentPrice(@RequestParam("rent") int rentPrice){
 		List<RealEstate> realEstateList = realEstateService.getRealEstateByRentPrice(rentPrice);
@@ -38,14 +38,14 @@ public class RealEstateController {
 	
 	// 면적과 가격을 전달 받고, 면적이 더 넓으면서 싼 매물 json response에 담는다.
 	@ResponseBody
-	@RequestMapping("/3")
+	@RequestMapping("/test01/3")
 	public List<RealEstate> realEstateByAreaPrice(@Param("area") int area, @Param("price") int price) {
 		List<RealEstate> realEstateList = realEstateService.getRealEstateByAreaPrice(area, price);
 		return realEstateList;
 	}
 	
-	// 객체로 insert 하기
-	@RequestMapping("/4")
+	// 매물 정보를 객체로 저장
+	@RequestMapping("/test02/1")
 	@ResponseBody
 	public String createRealEstateByObject() {
 		RealEstate realEstate = new RealEstate();
@@ -55,32 +55,32 @@ public class RealEstateController {
 		realEstate.setType("매매");
 		realEstate.setPrice(100000);
 		int count = realEstateService.addRealEstateByObject(realEstate);
-		return "삽입 개수 : " + count;
+		return "입력 성공 : " + count;
 	}
 	
 	
 	// field 로 insert 하기
 	@ResponseBody
-	@RequestMapping("/5")
+	@RequestMapping("/test02/2")
 	public String createRealEstate(@RequestParam("realtorId") int realtorId) {
 		int count = realEstateService.addRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
 		
-		return "삽입 개수 : " + count;
+		return "입력 성공 : " + count;
 	}
 	
-	// update
+	// id가 22인 행의 type을 전세로 바꾸고 price를 70000로 변경
 	@ResponseBody
-	@RequestMapping("/6")
-	public String createRealEstateForUpdate() {
-		int count = realEstateService.addRealEstateForUpdate();
+	@RequestMapping("/test03/1")
+	public String updateRealEstate() {
+		int count = realEstateService.updateRealEstate(22, "전세", 70000);
 		return "수정 성공 : " + count;
 	}
 	
-	// delete
+	// 전달받은 id의 매물 정보 삭제
 	@ResponseBody
-	@RequestMapping("/7")
-	public String createRealEstateForDelete(@Param("id") int id) {
-		int count = realEstateService.addRealEstateForDelete(id);
+	@RequestMapping("/test04/1")
+	public String deleteRealEstate(@Param("id") int id) {
+		int count = realEstateService.deleteRealEstate(id);
 		return "삭제 성공 : " + count;
 	}
 	
