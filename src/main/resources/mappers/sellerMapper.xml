@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.sinsokeyt.spring.test.jsp.repository.SellerRepository">
+ 	<insert id="insertSeller" parameterType="map">
+ 		insert into
+ 			seller
+ 		(
+			nickname
+			,profileImageUrl
+			,temperature
+ 		)
+ 		value
+ 		(
+			#{nickname}
+			,#{profileImageUrl}
+			,#{temperature}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectLastSeller" resultType="com.sinsokeyt.spring.test.jsp.domain.Seller">
+ 		select
+ 			nickname
+			,profileImageUrl
+			,temperature
+		from 
+			seller
+		order by
+			id desc
+		limit
+			1
+ 	</select>
+ 	
+ 	<select id="selectSellerById" parameterType="int" 
+ 	resultType="com.sinsokeyt.spring.test.jsp.domain.Seller">
+ 		select
+ 			nickname
+			,profileImageUrl
+			,temperature
+		from 
+			seller
+		where
+			id = #{id}
+ 	</select>
+ 	
+ </mapper>
