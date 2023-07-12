@@ -14,5 +14,5 @@ public interface SellerRepository {
 	
 	public Seller selectLastSeller();
 	
-	public Seller selectSellerById(@Param("id") int id);
+	public Seller selectSeller(@Param("id") int id);
 }

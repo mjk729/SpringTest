@@ -2,6 +2,7 @@ package com.sinsokeyt.spring.test.jsp;
 
 
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class SellerController {
 			,@RequestParam("temperature") double temperature) {
 		
 		int count = sellerService.addUser(nickname, profileImageUrl, temperature);
-		return "입력 성공 : " + count;
+		return "삽입 성공 : " + count;
 	}
 	
 	
@@ -37,17 +38,23 @@ public class SellerController {
 	}
 	
 	@GetMapping("/lastseller")
-	public String lastSeller(Model model) {
+	public String lastSeller(Model model){
 		Seller seller = sellerService.getLastSeller();
-		model.addAttribute("result", seller);
+		model.addAttribute("seller", seller);
 		return "jsp/sellerInfo";
 	}
 	
-	@GetMapping("/lastseller")
-	public String lastSellerById(Model model, @RequestParam("id") int id) {
-		Seller seller = sellerService.getSellerById(id);
-		model.addAttribute("result", seller);
+	
+	@GetMapping("/info")
+	public String seller(@RequestParam(value="id", required = false) Integer id, Model model) {
+		Seller seller = null;
+		if(id == null) {// 파라미터가 없는 경우			
+			seller = sellerService.getLastSeller();
+		} else {	// id가 전달된 경우
+			seller = sellerService.getSeller(id);
+		}
+		model.addAttribute("seller", seller);
 		return "jsp/sellerInfo";
-		
 	}
+	
 }

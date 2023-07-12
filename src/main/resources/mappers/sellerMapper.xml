@@ -33,8 +33,7 @@
 			1
  	</select>
  	
- 	<select id="selectSellerById" parameterType="int" 
- 	resultType="com.sinsokeyt.spring.test.jsp.domain.Seller">
+ 	<select id="selectSeller" parameterType="int" resultType="com.sinsokeyt.spring.test.jsp.domain.Seller">
  		select
  			nickname
 			,profileImageUrl

@@ -13,12 +13,12 @@
 	<h1>판매자 추가</h1>
 	
 	<form action="/jsp/seller/add" method="post" class="font-weight-bold">
-	<label>닉네임</label><br>
-	<input type="text" name="nickname" class="mb-2"><br>
-	<label>프로필 사진 url</label><br>
-	<input type="text" name="url" class="mb-2"><br>
-	<label>온도</label><br>
-	<input type="text" name="temperature" class="mb-2"><br>
+	<label>닉네임</label>
+	<input type="text" name="nickname" class="form-control col-3">
+	<label>프로필 사진 url</label>
+	<input type="text" name="url" class="form-control col-6">
+	<label>온도</label>
+	<input type="text" name="temperature" class="form-control col-3">
 	<button type="submit" class="btn btn-primary">추가</button>
 	</form>
 	</div>
