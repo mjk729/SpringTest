@@ -42,16 +42,33 @@
 		,#{phoneNumber}
 		,#{state}
   		)
-  		
   	</insert>
   	
-  	<select id="selectCountInfo" parameterType="map" resultType="int">
+  	<delete id="deleteBooking" parameterType="int">
+  		delete from
+  			booking
+  		where
+  			id = #{id}
+  	</delete>
+  		
+  	
+  	<select id="selectBookingInfo" parameterType="map" resultType="com.sinsokeyt.spring.test.ajax.domain.Booking">
   		select
-  			count(1)
+  			id
+			,name
+			,headcount
+			,day
+			,date
+			,phoneNumber
+			,state
+			,createdAt
+			,updatedAt
   		from
   			booking
   		where
-  			name = #{name} || phoneNumber = #{phoneNumber}
+  			name = #{name} AND phoneNumber = #{phoneNumber}
   		
   	</select>
+  	
+  	
   </mapper>

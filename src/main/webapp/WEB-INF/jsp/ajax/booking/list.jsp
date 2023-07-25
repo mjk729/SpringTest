@@ -26,7 +26,7 @@
                 <nav class="mt-4">
                     <ul class="nav nav-fill">
                         <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/search">객실보기</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/main">객실보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
                     </ul>
@@ -94,7 +94,34 @@
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+	<script>
+		$(document).ready(function(){
+			$(".delete-btn").on("click", function(){
+			let bookingId = $(this).data("booking-id");
+			
+			$.ajax({
+				type:"get"
+				,url:"/ajax/booking/delete"
+				,data:{"id":bookingId}
+				,success:function(data){
+					// 성공 : {"result":"success"}
+ 					// 실패 : {"result":"fail"}
+ 					if(data.result == "success") {
+ 						// 리스트 페이지 이동
+ 						location.reload();
+ 					} else {
+ 						alert("삭제 실패!");
+ 					}
+				}
+				,error:function(){
+					alert("삭제 에러");
+				}
+			});
+			
+			});
+		});
+	</script>
+	
 
 </body>
 </html>

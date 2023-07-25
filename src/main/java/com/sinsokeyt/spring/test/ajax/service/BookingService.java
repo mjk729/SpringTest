@@ -27,16 +27,18 @@ public class BookingService {
 			int day,
 			int headcount,
 			String phoneNumber) {
-		int count = bookingRepository.insertBooking(name, date, day, headcount, phoneNumber);
+		int count = bookingRepository.insertBooking(name, date, day, headcount, phoneNumber, "대기중");
+		return count;
+	}
+		
+	public int deleteBooking(int id) {
+		int count = bookingRepository.deleteBooking(id);
 		return count;
 	}
 	
-	//url 전달받고 리턴하는 함수
-		public boolean isDuplicateInfo(String name, String phoneNumber) {
-			int count = bookingRepository.selectCountInfo(name, phoneNumber);
-			
-			return count != 0;
-			
-		}
-	
+	public Booking getBookingInfo(String name, String phoneNumber) {
+		Booking booking = bookingRepository.selectBookingInfo(name,phoneNumber);
+		return booking;
+		
+	}
 }

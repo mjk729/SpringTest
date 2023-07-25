@@ -58,7 +58,7 @@
 						,data:{"id":id}
 						,success:function(data){
 							// 성공 : {"result" : "success"}
-							// 싶래 : {"result" : "fail"}
+							// 실패 : {"result" : "fail"}
 							if(data.result == "success"){
 								location.reload();
 							}else{

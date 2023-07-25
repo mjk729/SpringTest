@@ -8,14 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>통나무 펜션 예약 화면</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+       
         <link rel="stylesheet" href="/ajax/css/style.css" type="text/css">
 </head>
 <body>
@@ -26,7 +27,7 @@
                 <nav class="mt-4">
                     <ul class="nav nav-fill">
                         <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/search">객실보기</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/main">객실보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
                     </ul>
@@ -34,13 +35,14 @@
             </header>
             
             <section>
-            	<h3 class="text-center font-weight-bold mt-4 mb-4">예약 하기</h3>
-		
+            	<h2 class="text-center font-weight-bold mt-4 mb-4">예약 하기</h2>
+				
+				<div>
 				<div class="text-center">
 					<label>이름</label><br>
 					<input type="text" class="col-6" id="nameInput"><br>
 					<label class="mt-2">예약 날짜</label><br>
-					<input type="text" class="col-6" id="dateInput"><br>
+					<input type="text" class="col-6" id="dateInput" name="dateInput"><br>
 					<label class="mt-2">숙박일수</label><br>
 					<input type="text" class="col-6" id="dayInput"><br>
 					<label class="mt-2">숙박인원</label><br>
@@ -48,6 +50,7 @@
 					<label class="mt-2">전화번호</label><br>
 					<input type="text" class="col-6" id="phoneNumberInput"><br>
 					<button class="btn btn-warning col-6 mt-3" type="button" id="addBtn">예약하기</button>
+				</div>
 				</div>
 		
             </section>
@@ -68,16 +71,21 @@
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
 	<script>
+	
+			
+			
+			
 		$(document).ready(function(){
 			
-			$("addBtn").on("click",function(){
+			$("#addBtn").on("click",function(){
 				
-				let name = $("nameInput").val();
-				let date = $("dayInput").val();
-				let day = $("dayInput").val();
-				let headcount = $("headcountInput").val();
-				let phoneNumber = $("phoneNumberInput").val();
+				let name = $("#nameInput").val();
+				let date = $("#dateInput").val();
+				let day = $("#dayInput").val();
+				let headcount = $("#headcountInput").val();
+				let phoneNumber = $("#phoneNumberInput").val();
 			
 				if(name == "") {
 	 				alert("이름을 입력하세요");
@@ -95,14 +103,29 @@
 	 				alert("숙박 인원을 입력하세요");
 	 				return ;
 	 			}
+	 			
+	 			// 숙박일수 가 숫자가 아닌경우
+	 			// Not a Number
+	 			if(isNaN(headcount)){
+	 				alert("숙박인원은 숫자만 입력 가능합니다.");
+	 				retrun;
+	 			}
+	 			
+	 			// 숙박일수 가 숫자가 아닌경우
+	 			// Not a Number
+	 			if(isNaN(day)){
+	 				alert("숙박일수는 숫자만 입력 가능합니다.");
+	 				retrun;
+	 			}
+	 			
 	 			if(phoneNumber == "") {
 	 				alert("전화 번호를 입력하세요");
 	 				return ;
 	 			}
 				
 	 			$.ajax({
-	 				type:"post"
-	 				, url:"/ajax/favorite/add"
+	 				type:"get"
+	 				, url:"/ajax/booking/add"
 	 				, data:{"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
 	 				, success:function(data) {
 	 					// 성공 : {"result":"success"}
@@ -111,17 +134,20 @@
 	 						// 리스트 페이지 이동
 	 						location.href = "/ajax/booking/list";
 	 					} else {
-	 						alert("추가 실패!");
+	 						alert("예약 실패!");
 	 					}
 	 					
 	 				}
 	 				, error:function() {
-	 					alert("추가 에러!!");
+	 					alert("예약 에러!!");
 	 				}
 	 			});
 	 			
 			});
 			
+			$("#dateInput").datepicker({
+				dateFormat:"yy년 mm월 dd일"
+			});
 		});
 	</script>	
 	

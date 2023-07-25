@@ -27,7 +27,7 @@
                 <nav class="mt-4">
                     <ul class="nav nav-fill">
                         <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/search">객실보기</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/ajax/booking/main">객실보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
                     </ul>
@@ -53,17 +53,17 @@
                         </div>
                         <div class="member-input mt-3" id="member">
                             <div class="input-gorup form-inline">
-                                <label class="input-label">아이디 :</label>
-                                <input type="text" class="form-control text-input" id="id">
+                                <label class="input-label">이름 :</label>
+                                <input type="text" class="form-control text-input" id="nameInput">
                             </div>
                             <div class="input-gorup form-inline mt-3">
-                                <label class="input-label">비밀번호 :</label>
-                                <input type="password" class="form-control text-input" id="password">
+                                <label class="input-label">전화번호 :</label>
+                                <input type="text" class="form-control text-input" id="phoneNumberInput">
                             </div>
 
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success mt-3 mr-5" id="lookupBtn">조회 하기</button>
+                            <button class="btn btn-success mt-3 mr-5" id="findBtn">조회 하기</button>
                         </div>
                     </div>
                 </article>
@@ -95,54 +95,47 @@
     <script>
     $(document).ready(function() {
 		
- 		$("#addBtn").on("click", function() {
+ 		$("#findBtn").on("click", function() {
  			// 입력한 내용을 기반으로 add API로 데이터 저장
  			let name = $("#nameInput").val();
- 			let url = $("#urlInput").val();
+ 			let phoneNumber = $("#phoneNumberInput").val();
  			
  			if(name == "") {
  				alert("이름을 입력하세요");
  				return;
  			}
  			
- 			if(url == "") {
- 				alert("url을 입력하세요");
- 				return ;
- 			}
- 			
- 			// http:// 시작하지 않고,  https:// 시작하지 않으면
- 			if(!url.startsWith("http://") && !url.startsWith("https://")) {
- 				alert("주소형식을 확인해 주세요");
- 				return ;
- 			}
- 			
- 			// 중복체크 안 한경우 
- 			if(checkedDuplicate == false) {
- 				alert("url 중복확인을 하세요");
- 				return ;
- 			}
- 			
- 			// 중복된 경우 
- 			if(isDuplicateUrl) {
- 				alert("url이 중복되었습니다.");
+ 			if(phoneNumber == "") {
+ 				alert("전화번호를 입력하세요");
  				return ;
  			}
  			
  			
  			
  			$.ajax({
- 				type:"post"
- 				, url:"/ajax/favorite/add"
- 				, data:{"name":name, "url":url}
+ 				type:"get"
+ 				, url:"/ajax/booking/search"
+ 				, data:{"name":name, "phoneNumber":phoneNumber}
  				, success:function(data) {
  					// 성공 : {"result":"success"}
  					// 실패 : {"result":"fail"}
  					if(data.result == "success") {
- 						// 리스트 페이지 이동
- 						location.href = "/ajax/favorite/list";
+ 						
+ 						if(data.result == "fail"){
+ 							alert("조회된 데이터가 없습니다.")
+ 						}else{
+ 						let message = "이름 : " + data.info.name
+ 						+ "\n날짜 : " + data.info.date.substring(0,10)
+ 						+ "\n일수 : " + data.info.day
+ 						+ "\n인원 : " + data.info.headcount
+ 						+ "\n상태 : " + data.info.state;
+ 						
+ 						alert(message);
+ 						
  					} else {
- 						alert("추가 실패!");
+ 						alert("조회 실패!");
  					}
+ 						}
  					
  				}
  				, error:function() {
