@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.sinsokeyt.spring.test.ajax.repository.BookingRepository">
+  	<select id="selectBooking" resultType="com.sinsokeyt.spring.test.ajax.domain.Booking">
+  		select 
+  			id
+			,name
+			,headcount
+			,day
+			,date
+			,phoneNumber
+			,state
+			,createdAt
+			,updatedAt
+		from
+			booking
+		order by
+			state desc, date
+  	</select>
+  	
+  	<insert id="insertBooking" parameterType="map">
+  	insert into
+  		booking
+  		(
+  		name
+		,headcount
+		,day
+		,date
+		,phoneNumber
+		,state
+		)
+  		value
+  		(
+  		#{name}
+		,#{headcount}
+		,#{day}
+		,#{date}
+		,#{phoneNumber}
+		,#{state}
+  		)
+  		
+  	</insert>
+  	
+  	<select id="selectCountInfo" parameterType="map" resultType="int">
+  		select
+  			count(1)
+  		from
+  			booking
+  		where
+  			name = #{name} || phoneNumber = #{phoneNumber}
+  		
+  	</select>
+  </mapper>
