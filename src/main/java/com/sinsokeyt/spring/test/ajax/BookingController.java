@@ -63,9 +63,9 @@ public class BookingController {
 		return "ajax/booking/input";
 	}
 	
-	@GetMapping("/search")
+	@GetMapping("/main")
 	public String searchBooking() {
-		return "ajax/booking/search";
+		return "ajax/booking/main";
 	}
 	
 	// 삭제 API

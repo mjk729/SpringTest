@@ -119,10 +119,9 @@
  				, success:function(data) {
  					// 성공 : {"result":"success"}
  					// 실패 : {"result":"fail"}
- 					if(data.result == "success") {
  						
  						if(data.result == "fail"){
- 							alert("조회된 데이터가 없습니다.")
+ 							alert("조회된 데이터가 없습니다.");
  						}else{
  						let message = "이름 : " + data.info.name
  						+ "\n날짜 : " + data.info.date.substring(0,10)
@@ -132,9 +131,6 @@
  						
  						alert(message);
  						
- 					} else {
- 						alert("조회 실패!");
- 					}
  						}
  					
  				}
@@ -142,11 +138,6 @@
  					alert("추가 에러!!");
  				}
  			});
- 			
- 			
- 			
- 			
- 			
  			
  		});
  		

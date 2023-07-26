@@ -37,21 +37,26 @@
             <section>
             	<h2 class="text-center font-weight-bold mt-4 mb-4">예약 하기</h2>
 				
-				<div>
-				<div class="text-center">
-					<label>이름</label><br>
-					<input type="text" class="col-6" id="nameInput"><br>
-					<label class="mt-2">예약 날짜</label><br>
-					<input type="text" class="col-6" id="dateInput" name="dateInput"><br>
-					<label class="mt-2">숙박일수</label><br>
-					<input type="text" class="col-6" id="dayInput"><br>
-					<label class="mt-2">숙박인원</label><br>
-					<input type="text" class="col-6" id="headcountInput"><br>
-					<label class="mt-2">전화번호</label><br>
-					<input type="text" class="col-6" id="phoneNumberInput"><br>
-					<button class="btn btn-warning col-6 mt-3" type="button" id="addBtn">예약하기</button>
-				</div>
-				</div>
+				<div class="d-flex justify-content-center">
+	            <div class="w-50">
+	                <label>이름</label>
+	                <input type="text" class="form-control" id="nameInput">
+	
+	                <label class="mt-3">예약날짜</label>
+	                <input type="text" class="form-control" id="dateInput">
+	
+	                <label class="mt-3">숙박일수</label>
+	                <input type="text" class="form-control" id="dayInput">
+	
+	                <label class="mt-3">숙박인원</label>
+	                <input type="text" class="form-control" id="headcountInput">
+	
+	                <label class="mt-3">전화번호</label>
+	                <input type="text" class="form-control" id="phoneNumberInput">
+	
+	                <button class="btn btn-warning btn-block mt-3" id="addBtn">예약하기</button>
+	            </div>
+	        </div>
 		
             </section>
             
